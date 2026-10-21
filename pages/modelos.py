@@ -19,6 +19,7 @@ ab = D.csv("orig_ablacion.csv"); tri = D.csv("orig_optuna_trials.csv"); imp = D.
 q = D.csv("residuos_cuantiles.csv"); pesos = D.csv("pesos_por_hora.csv", index_col=0)
 PT = D.pred_prueba(); XP = D.predictoras_prueba(); META = D.metadata()
 RANGOS = META["columnas_entrada"]
+DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
 D.modelo()          # carga el modelo una sola vez al iniciar
 
 tipo = lambda m: "Original" if m == D.ORIG else ("Tradicional" if m in D.TRAD else "Machine Learning")
@@ -177,7 +178,7 @@ def pronosticar(_, fecha, hora, modelo, festivo, *vals):
                                          html.Div(f"{p:,.0f} MWh".replace(",", "."), className="fs-2 fw-bold text-danger"),
                                          html.Div(f"Intervalo de predicción del 90 %: {p + qq.q05:,.0f} a {p + qq.q95:,.0f} MWh".replace(",", "."), className="small"),
                                          html.Div(f"Demanda real de esa hora: {real:,.0f} MWh".replace(",", ".") if real else "", className="small mt-1"),
-                                         html.Div(f"{ts:%A %d-%m-%Y, %H:00}", className="small text-muted mt-1")]))
+                                         html.Div(f"{DIAS[ts.dayofweek]} {ts:%d-%m-%Y}, {ts:%H}:00", className="small text-muted mt-1")]))
         phi = D.shap_local(x, modelo).sort_values(key=np.abs, ascending=False).head(10)
         f = go.Figure(go.Bar(x=phi.values, y=phi.index, orientation="h", marker_color=[G.ROJO if v > 0 else G.VERDE for v in phi.values],
                              hovertemplate="%{y}: %{x:+,.1f} MWh<extra></extra>"))

@@ -1,4 +1,7 @@
 """Sección 2: EDA con filtros globales que actualizan todos los gráficos."""
+import warnings
+from functools import lru_cache
+
 import dash
 import dash_bootstrap_components as dbc
 import numpy as np
@@ -8,6 +11,8 @@ from dash import Input, Output, callback, dcc, html
 
 import data as D
 import plots as G
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 dash.register_page(__name__, path="/eda", name="EDA", order=1)
 
@@ -67,7 +72,12 @@ def filtrar(ini, fin, tipos, horas):
           Output("g-desc", "figure"), Output("g-acf", "figure"), Output("g-pacf", "figure"), Output("t-adf", "children"),
           Input("f-fechas", "start_date"), Input("f-fechas", "end_date"), Input("f-tipo", "value"), Input("f-horas", "value"))
 def actualizar(ini, fin, tipos, horas):
-    d = filtrar(ini, fin, tipos, horas)
+    return _actualizar(str(ini)[:10], str(fin)[:10], tuple(tipos or TIPOS), tuple(horas))
+
+
+@lru_cache(maxsize=64)          # los mismos filtros no se recalculan
+def _actualizar(ini, fin, tipos, horas):
+    d = filtrar(ini, fin, list(tipos), list(horas))
     if len(d) < 48:
         v = G.vacio(); return ("Muy pocas horas con estos filtros: amplíe el periodo.", v, v, v, v, v, "", v, v, v, "")
     res = f"{len(d):,} horas seleccionadas · demanda media {d.mwh.mean():,.0f} MWh · máximo {d.mwh.max():,.0f} MWh".replace(",", ".")
@@ -76,7 +86,8 @@ def actualizar(ini, fin, tipos, horas):
                              hovertemplate="%{x|%d-%b-%Y}: %{y:,.0f} MWh<extra></extra>"))
     s.add_vline(x=pd.Timestamp("2025-01-01").timestamp() * 1000, line_dash="dash", line_color=G.TINTA, annotation_text="inicio de la prueba")
     s.update_layout(title="Demanda media diaria (MWh)", yaxis_title="MWh", height=330)
-    h = go.Figure(go.Histogram(x=d.mwh, nbinsx=60, marker_color=G.VERDE)); h.update_layout(title="Distribución de la demanda horaria", xaxis_title="MWh", yaxis_title="horas", height=330)
+    cnt, ed = np.histogram(d.mwh, bins=60)          # se agrega en el servidor: no se envían 52.000 valores al navegador
+    h = go.Figure(go.Bar(x=(ed[:-1] + ed[1:]) / 2, y=cnt, width=np.diff(ed), marker_color=G.VERDE, hovertemplate="%{x:,.0f} MWh: %{y} horas<extra></extra>")); h.update_layout(title="Distribución de la demanda horaria", xaxis_title="MWh", yaxis_title="horas", height=330)
     p = go.Figure()
     for t, c in zip(TIPOS, [G.ROJO, G.ORO, G.VERDE]):
         g = d[d.tipo_dia == t].groupby("hora").mwh.mean()
@@ -128,3 +139,7 @@ def bivariado(ini, fin, tipos, horas, x, y, c):
                                  hovertemplate=f"{NUM[x]}: %{{x:.1f}}<br>{NUM[y]}: %{{y:.1f}}<extra>{k}</extra>"))
     f.update_layout(title=f"{NUM[y]} vs {NUM[x]}", xaxis_title=NUM[x], yaxis_title=NUM[y], height=430, legend_title=CAT[c])
     return f
+
+
+# precálculo de la vista inicial al arrancar el servidor (la primera visita no espera el cálculo)
+_actualizar(str(E.index.min().date()), str(E.index.max().date()), tuple(TIPOS), (0, 23))
