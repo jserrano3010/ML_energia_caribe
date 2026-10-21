@@ -1,0 +1,9 @@
+{
+ "elegido": "Híbrido (Ridge + XGBoost residual)",
+ "configuraciones": {
+  "Híbrido (Ridge + XGBoost residual)": "d3_n300",
+  "Random forest": "hoja5",
+  "Ridge (lineal)": "a100",
+  "XGBoost": "d3_n300"
+ }
+}

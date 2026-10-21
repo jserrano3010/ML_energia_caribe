@@ -1,0 +1,54 @@
+{'filas': 52272, 'entrenamiento': 36552, 'prueba': 15672, 'inicio': '2020-10-29 00:00:00', 'fin': '2026-10-15 23:00:00', 'corte_prueba': '2025-01-01', 'umbral_pico_p95_mwh': 1372.9419974999998, 'n_predictoras': 28, 'predictoras': ['hora', 'dow', 'mes', 'festivo', 'dia_antes_festivo', 'dia_despues_festivo', 'tipo_dia', 'doy_sin', 'doy_cos', 'hora_sin', 'hora_cos', 'navidad', 't', 'lag24', 'lag48', 'lag168', 'lag336', 'media_dia_ant', 'max_dia_ant', 'media_7d', 'media_misma_hora_4sem', 'T2M', 'RH2M', 'WS2M', 'calor', 'tmax_dia', 'lluvia_24h', 'calor_x_hora']}
+fold 0 listo
+fold 1 listo
+fold 2 listo
+fold 3 listo
+fold 4 listo
+ELEGIDO (validación): Híbrido (Ridge + XGBoost residual) {'Híbrido (Ridge + XGBoost residual)': 'd3_n300', 'Random forest': 'hoja5', 'Ridge (lineal)': 'a100', 'XGBoost': 'd3_n300'}
+
+=== VALIDACIÓN (media 5 folds) ===
+                               modelo  config       MSE    RMSE  MAPE  AUC_pico   CSI   POD   FAR  mejora_MSE_vs_Persistencia_%  mejora_MSE_vs_Estacional_%  mejora_MSE_vs_Promedio por hora y día_%
+   Híbrido (Ridge + XGBoost residual) d3_n300  2297.065  47.599 3.063     0.971 0.191 0.217 0.130                        58.366                      64.089                                   78.874
+                       Ridge (lineal)    a100  2439.825  48.944 3.192     0.967 0.194 0.215 0.133                        55.779                      61.857                                   77.561
+                        Random forest   hoja5  2618.788  50.765 3.200     0.962 0.157 0.178 0.093                        52.535                      59.060                                   75.915
+                              XGBoost d3_n300  2671.330  51.374 3.312     0.959 0.153 0.175 0.099                        51.583                      58.238                                   75.432
+    Persistencia (misma hora de ayer)       -  5517.300  74.080 4.624     0.937 0.278 0.400 0.599                         0.000                      13.746                                   49.257
+Estacional (misma hora semana pasada)       -  6396.582  79.071 5.118     0.901 0.233 0.345 0.645                       -15.937                       0.000                                   41.171
+              Promedio por hora y día       - 10873.106 101.184 7.036     0.911 0.000 0.000 0.000                       -97.073                     -69.983                                    0.000
+
+=== PRUEBA 2025-01 a 2026-10 ===
+                               modelo       MSE    RMSE     MAE   MAPE  AUC_pico   POD   FAR   CSI  mejora_MSE_vs_Persistencia_%  mejora_MSE_vs_Estacional_%  mejora_MSE_vs_Promedio por hora y día_%    MSE_lo    MSE_hi  mejora_vs_persist_lo  mejora_vs_persist_hi
+                       Ridge (lineal)  3568.599  59.738  46.473  3.383     0.966 0.792 0.076 0.743                        45.272                      57.702                                   93.342  3193.834  3900.438                40.572                49.939
+   Híbrido (Ridge + XGBoost residual)  5405.074  73.519  57.682  4.100     0.962 0.679 0.048 0.657                        17.108                      35.935                                   89.916  4603.112  6051.139                 7.647                26.794
+    Persistencia (misma hora de ayer)  6520.590  80.750  57.992  4.345     0.926 0.833 0.165 0.716                         0.000                      22.713                                   87.835  5833.738  7209.274                   NaN                   NaN
+Estacional (misma hora semana pasada)  8436.854  91.852  66.633  5.002     0.906 0.804 0.184 0.681                       -29.388                       0.000                                   84.260  6893.044  9915.049               -53.711                -9.945
+                              XGBoost 10427.987 102.118  71.548  4.958     0.948 0.604 0.070 0.578                       -59.924                     -23.600                                   80.545  8119.465 12747.048               -90.468               -27.623
+                        Random forest 19200.916 138.567  93.155  6.352     0.833 0.162 0.112 0.159                      -194.466                    -127.584                                   64.179 14973.722 24087.315              -272.646              -137.041
+              Promedio por hora y día 53601.852 231.521 203.080 14.444     0.831 0.000 0.000 0.000                      -722.040                    -535.330                                    0.000 44267.819 63323.724              -890.300              -598.344
+referencia                             Estacional (misma hora semana pasada)  Persistencia (misma hora de ayer)  Promedio por hora y día
+modelo                                                                                                                                  
+Estacional (misma hora semana pasada)                                    NaN                             0.0039                      0.0
+Híbrido (Ridge + XGBoost residual)                                    0.0000                             0.0036                      0.0
+Persistencia (misma hora de ayer)                                     0.0039                                NaN                      0.0
+Promedio por hora y día                                               0.0000                             0.0000                      NaN
+Random forest                                                         0.0000                             0.0000                      0.0
+Ridge (lineal)                                                        0.0000                             0.0000                      0.0
+XGBoost                                                               0.1479                             0.0008                      0.0
+                               modelo                         referencia       DM      p
+    Persistencia (misma hora de ayer) Híbrido (Ridge + XGBoost residual)  -2.9191 0.0036
+Estacional (misma hora semana pasada) Híbrido (Ridge + XGBoost residual)  -4.1462 0.0000
+              Promedio por hora y día Híbrido (Ridge + XGBoost residual) -11.0595 0.0000
+                        Random forest Híbrido (Ridge + XGBoost residual)  -6.4615 0.0000
+                       Ridge (lineal) Híbrido (Ridge + XGBoost residual)   6.9716 0.0000
+                              XGBoost Híbrido (Ridge + XGBoost residual)  -5.0443 0.0000
+segmento         valor     n  Persistencia (misma hora de ayer)  Estacional (misma hora semana pasada)  Promedio por hora y día  Híbrido (Ridge + XGBoost residual)  Random forest  Ridge (lineal)  XGBoost
+    tipo       festivo   768                               5.11                                   9.40                    10.76                                4.13           5.07            4.12     4.54
+    tipo fin de semana  4440                               5.34                                   5.18                    14.20                                3.90           4.67            3.32     4.40
+    tipo       laboral 10464                               3.87                                   4.61                    14.82                                4.18           7.16            3.36     5.22
+   calor          frío  3918                               3.15                                   4.24                    10.73                                3.06           3.23            2.87     2.79
+   calor      templado  3918                               3.98                                   4.97                    14.41                                4.08           6.23            3.35     4.78
+   calor      caluroso  3918                               4.93                                   5.25                    15.27                                4.35           7.05            3.64     5.54
+   calor  muy caluroso  3918                               5.31                                   5.55                    17.37                                4.90           8.90            3.68     6.73
+                                         MSE    RMSE     MAE   MAPE  AUC_pico   POD    FAR    CSI
+Híbrido (Ridge + XGBoost residual)  7271.194  85.271  69.274  4.894     0.966  0.56  0.022  0.553
+XGBoost                             9710.812  98.543  70.835  4.910     0.962  0.60  0.038  0.587

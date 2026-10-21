@@ -1,0 +1,25 @@
+modelo,referencia,DM,p
+Persistencia (misma hora de ayer),Estacional (misma hora semana pasada),2.897580489728969,0.0038867387408929458
+Persistencia (misma hora de ayer),Promedio por hora y día,10.334408464704335,2.752158726070955e-23
+Persistencia (misma hora de ayer),Híbrido (Ridge + XGBoost residual),-2.9191207844948033,0.003631257522928558
+Estacional (misma hora semana pasada),Persistencia (misma hora de ayer),-2.897580489728969,0.0038867387408929458
+Estacional (misma hora semana pasada),Promedio por hora y día,9.683868504182707,8.213590634129874e-21
+Estacional (misma hora semana pasada),Híbrido (Ridge + XGBoost residual),-4.146161720177421,3.827719256322008e-05
+Promedio por hora y día,Persistencia (misma hora de ayer),-10.334408464704335,2.752158726070955e-23
+Promedio por hora y día,Estacional (misma hora semana pasada),-9.683868504182707,8.213590634129874e-21
+Promedio por hora y día,Híbrido (Ridge + XGBoost residual),-11.059521550388022,3.5466520687589964e-26
+Híbrido (Ridge + XGBoost residual),Persistencia (misma hora de ayer),2.9191207844948033,0.003631257522928558
+Híbrido (Ridge + XGBoost residual),Estacional (misma hora semana pasada),4.146161720177421,3.827719256322008e-05
+Híbrido (Ridge + XGBoost residual),Promedio por hora y día,11.059521550388022,3.5466520687589964e-26
+Random forest,Persistencia (misma hora de ayer),-5.473555007554462,6.297976273888777e-08
+Random forest,Estacional (misma hora semana pasada),-4.345069885032224,1.6145583349286443e-05
+Random forest,Promedio por hora y día,14.623895849686543,4.2988777504585075e-42
+Random forest,Híbrido (Ridge + XGBoost residual),-6.461549280761741,2.0291248773302427e-10
+Ridge (lineal),Persistencia (misma hora de ayer),10.684707398594458,1.1490862768528997e-24
+Ridge (lineal),Estacional (misma hora semana pasada),7.573999079689583,1.2433608674280593e-13
+Ridge (lineal),Promedio por hora y día,10.998080208143167,6.307225474672204e-26
+Ridge (lineal),Híbrido (Ridge + XGBoost residual),6.971602933763074,7.697622466749224e-12
+XGBoost,Persistencia (misma hora de ayer),-3.3688398363735366,0.0007993134647174562
+XGBoost,Estacional (misma hora semana pasada),-1.448590666027717,0.1479326623696623
+XGBoost,Promedio por hora y día,12.451643223239223,4.4304621088948224e-32
+XGBoost,Híbrido (Ridge + XGBoost residual),-5.044333432484832,5.90733113677865e-07
