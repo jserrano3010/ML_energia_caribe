@@ -1,0 +1,9 @@
+{
+ "elegido": "Random forest (relativo)",
+ "configuraciones": {
+  "Híbrido Ridge + XGBoost (residuo relativo)": "d3_n300",
+  "Random forest (relativo)": "hoja5",
+  "Ridge (lineal)": "a100",
+  "XGBoost (relativo)": "d6_n600"
+ }
+}
