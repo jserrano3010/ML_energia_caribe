@@ -1,0 +1,181 @@
+{
+ "modelo": "ATER (modelo original)",
+ "clase": "original_model.ModeloOriginal",
+ "semilla_global": 2026,
+ "hiperparametros": {
+  "eta": 89.38423554574598,
+  "lam": 0.9657109024109057,
+  "sigma": 5.068873602673464,
+  "eta_b": 0.00796538678948261
+ },
+ "expertos": {
+  "Random forest (relativo)": "hoja5",
+  "XGBoost (relativo)": "d6_n600",
+  "Híbrido Ridge + XGBoost (residuo relativo)": "d3_n300",
+  "Ridge (lineal)": "a100",
+  "Persistencia (misma hora de ayer)": "-"
+ },
+ "entrenado_con": "2020-10-29 00:00:00 a 2024-12-29 23:00:00 (36552 horas)",
+ "columnas_entrada": {
+  "hora": {
+   "tipo": "int32",
+   "min": 0.0,
+   "max": 23.0
+  },
+  "dow": {
+   "tipo": "int32",
+   "min": 0.0,
+   "max": 6.0
+  },
+  "mes": {
+   "tipo": "int32",
+   "min": 1.0,
+   "max": 12.0
+  },
+  "festivo": {
+   "tipo": "int64",
+   "min": 0.0,
+   "max": 1.0
+  },
+  "dia_antes_festivo": {
+   "tipo": "int64",
+   "min": 0.0,
+   "max": 1.0
+  },
+  "dia_despues_festivo": {
+   "tipo": "int64",
+   "min": 0.0,
+   "max": 1.0
+  },
+  "tipo_dia": {
+   "tipo": "int64",
+   "min": 0.0,
+   "max": 2.0
+  },
+  "doy_sin": {
+   "tipo": "float64",
+   "min": -0.9999994220246925,
+   "max": 0.9999855506507186
+  },
+  "doy_cos": {
+   "tipo": "float64",
+   "min": -0.9999791929590823,
+   "max": 0.9999907524084426
+  },
+  "hora_sin": {
+   "tipo": "float64",
+   "min": -1.0,
+   "max": 1.0
+  },
+  "hora_cos": {
+   "tipo": "float64",
+   "min": -1.0,
+   "max": 1.0
+  },
+  "navidad": {
+   "tipo": "int64",
+   "min": 0.0,
+   "max": 1.0
+  },
+  "t": {
+   "tipo": "float64",
+   "min": 0.07665982203969883,
+   "max": 4.243668720054757
+  },
+  "lag24": {
+   "tipo": "float64",
+   "min": 758.65341,
+   "max": 1582.0090500000001
+  },
+  "lag48": {
+   "tipo": "float64",
+   "min": 758.65341,
+   "max": 1582.0090500000001
+  },
+  "lag168": {
+   "tipo": "float64",
+   "min": 758.65341,
+   "max": 1582.0090500000001
+  },
+  "lag336": {
+   "tipo": "float64",
+   "min": 758.65341,
+   "max": 1582.0090500000001
+  },
+  "media_dia_ant": {
+   "tipo": "float64",
+   "min": 845.0719254166667,
+   "max": 1384.4210866666665
+  },
+  "max_dia_ant": {
+   "tipo": "float64",
+   "min": 929.01464,
+   "max": 1582.0090500000001
+  },
+  "media_7d": {
+   "tipo": "float64",
+   "min": 962.5673541071429,
+   "max": 1340.043957738095
+  },
+  "media_misma_hora_4sem": {
+   "tipo": "float64",
+   "min": 808.0494725,
+   "max": 1532.0714600000001
+  },
+  "T2M": {
+   "tipo": "float64",
+   "min": 22.88,
+   "max": 35.36
+  },
+  "RH2M": {
+   "tipo": "float64",
+   "min": 47.83,
+   "max": 97.26
+  },
+  "WS2M": {
+   "tipo": "float64",
+   "min": 0.04,
+   "max": 8.22
+  },
+  "calor": {
+   "tipo": "float64",
+   "min": 22.88,
+   "max": 42.58081554803792
+  },
+  "tmax_dia": {
+   "tipo": "float64",
+   "min": 26.73,
+   "max": 35.36
+  },
+  "lluvia_24h": {
+   "tipo": "float64",
+   "min": 0.0,
+   "max": 229.82999999999998
+  },
+  "calor_x_hora": {
+   "tipo": "float64",
+   "min": -39.38808997923325,
+   "max": 39.42286507803137
+  }
+ },
+ "metricas_prueba": {
+  "MSE": 2256.0915219583458,
+  "MAPE": 2.43538981243871,
+  "AUC_pico": 0.9752110622335683,
+  "CSI": 0.834895554365292
+ },
+ "validacion_anidada": {
+  "MSE_media": 2097.248015656248,
+  "MSE_de": 820.9788243562778
+ },
+ "versiones": {
+  "python": "3.13.16",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "sklearn": "1.9.1",
+  "xgboost": "3.4.1",
+  "optuna": "5.0.0"
+ },
+ "prueba_ida_y_vuelta": true,
+ "prueba_ida_y_vuelta_max_dif_MWh": 1.1368683772161603e-12
+}
