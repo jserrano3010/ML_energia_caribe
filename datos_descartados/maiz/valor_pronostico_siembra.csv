@@ -1,0 +1,10 @@
+,siembras,beneficio_total,siembras_con_perdida,rentables_no_sembradas
+Persistencia,24.0,126068203.53855817,0.0,0.0
+Promedio (Dummy),24.0,126068203.53855817,0.0,0.0
+Estacional,24.0,126068203.53855817,0.0,0.0
+Ridge (lineal),24.0,126068203.53855817,0.0,0.0
+Random forest,24.0,126068203.53855817,0.0,0.0
+XGBoost,24.0,126068203.53855817,0.0,0.0
+Híbrido (Ridge+RF),24.0,126068203.53855817,0.0,0.0
+Oráculo (precio real),24.0,126068203.53855817,0.0,0.0
+Sembrar siempre,42.0,64150441.03896397,18.0,0.0

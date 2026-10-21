@@ -1,0 +1,96 @@
+{
+ "elegido": "Estacional",
+ "sensibilidad_rubrica": {
+  "solo_error": "Random forest",
+  "solo_alzas": "XGBoost",
+  "iguales": "XGBoost"
+ },
+ "val_medio": [
+  {
+   "modelo": "Estacional",
+   "MSE": 0.008768047128403691,
+   "CSI": 0.10987756639157767,
+   "AUC_alza": 0.6041523161750151
+  },
+  {
+   "modelo": "Híbrido (Ridge+RF)",
+   "MSE": 0.009116967067920137,
+   "CSI": 0.14107610271841717,
+   "AUC_alza": 0.6290078447084536
+  },
+  {
+   "modelo": "Persistencia",
+   "MSE": 0.00957190302706498,
+   "CSI": 0.0,
+   "AUC_alza": 0.5
+  },
+  {
+   "modelo": "Promedio (Dummy)",
+   "MSE": 0.009216077460896055,
+   "CSI": 0.0,
+   "AUC_alza": 0.4530275474730347
+  },
+  {
+   "modelo": "Random forest",
+   "MSE": 0.009120253811569012,
+   "CSI": 0.1392581216180942,
+   "AUC_alza": 0.6138271440755668
+  },
+  {
+   "modelo": "Ridge (lineal)",
+   "MSE": 0.01014962195047844,
+   "CSI": 0.24859275726068086,
+   "AUC_alza": 0.651595391211113
+  },
+  {
+   "modelo": "XGBoost",
+   "MSE": 0.009864448722590513,
+   "CSI": 0.19376356167775072,
+   "AUC_alza": 0.613292973668968
+  }
+ ],
+ "test_medio": [
+  {
+   "modelo": "Estacional",
+   "MSE": 0.005318074840097393,
+   "CSI": 0.08197104130407784,
+   "AUC_alza": 0.5026346457821929
+  },
+  {
+   "modelo": "Híbrido (Ridge+RF)",
+   "MSE": 0.004392962172767678,
+   "CSI": 0.0751753738549829,
+   "AUC_alza": 0.6683911415011148
+  },
+  {
+   "modelo": "Persistencia",
+   "MSE": 0.004724006802163949,
+   "CSI": 0.0,
+   "AUC_alza": 0.5
+  },
+  {
+   "modelo": "Promedio (Dummy)",
+   "MSE": 0.004888047458172527,
+   "CSI": 0.0,
+   "AUC_alza": 0.5
+  },
+  {
+   "modelo": "Random forest",
+   "MSE": 0.004069013013725395,
+   "CSI": 0.14365242580120235,
+   "AUC_alza": 0.7311612195754484
+  },
+  {
+   "modelo": "Ridge (lineal)",
+   "MSE": 0.006140819271767236,
+   "CSI": 0.1568379306888945,
+   "AUC_alza": 0.6186215958274015
+  },
+  {
+   "modelo": "XGBoost",
+   "MSE": 0.004327131622264344,
+   "CSI": 0.18314272911239135,
+   "AUC_alza": 0.7333589595351878
+  }
+ ]
+}
