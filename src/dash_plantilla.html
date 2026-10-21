@@ -1,0 +1,254 @@
+<title>Demanda Air-e y ATER</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tablero de operación — franja superior con indicadores, pestañas, paneles en rejilla que se apilan en móvil */
+:root{
+  --bg:#f3f6f6; --panel:#ffffff; --ink:#14262b; --muted:#56696e; --line:#d6dfe0;
+  --accent:#d9661f; --cool:#1f5a6b; --good:#1f7a4d; --hl:#fbeee3;
+  --f-disp:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1719; --panel:#152226; --ink:#e3ecec; --muted:#93a7aa; --line:#2a3b3f;
+  --accent:#f08a46; --cool:#6fb3c4; --good:#5cc08d; --hl:#3a2a1f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1719; --panel:#152226; --ink:#e3ecec; --muted:#93a7aa; --line:#2a3b3f;
+  --accent:#f08a46; --cool:#6fb3c4; --good:#5cc08d; --hl:#3a2a1f; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--f-num);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+h2{font-family:var(--f-disp);font-weight:600;font-size:22px;margin:0;text-wrap:balance}
+h3{font-family:var(--f-disp);font-weight:600;font-size:18px;margin:0}
+[hidden]{display:none!important}
+p{margin:0;max-width:72ch}.muted{color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpi .v{font-family:var(--f-num);font-size:26px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.kpi .v.hot{color:var(--accent)}.kpi .v.txt{font-family:var(--f-disp);font-size:22px;line-height:1.15}.kpi .t{font-size:13px;color:var(--muted)}
+nav{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid var(--line)}
+nav button{font:600 15px var(--f-body);background:none;border:0;color:var(--muted);padding:10px 14px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+nav button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+nav button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section.panel{display:flex;flex-direction:column;gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px}
+.plot{width:100%;height:340px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+td.n{font-family:var(--f-num);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+tr.sel td{background:var(--hl);font-weight:600}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.ml{color:var(--cool);border-color:var(--cool)}.pill.win{color:var(--accent);border-color:var(--accent)}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.controls label{display:flex;gap:6px;align-items:center;font-size:14px}
+input[type=date]{font:inherit;padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--ink)}
+.note{font-size:13px;color:var(--muted)}
+.verd{border-left:4px solid var(--good);background:var(--panel)}
+pre.code{font-family:var(--f-num);font-size:12.5px;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:10px;overflow-x:auto;white-space:pre;margin:0}
+ul.l{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">XM · NASA POWER · mercado CARIBE SOL (Air-e) · oct. 2020 – oct. 2026</span>
+    <h1>Calor y energía en el Caribe: la demanda de mañana, hora por hora</h1>
+    <p class="muted">Pronóstico de la demanda eléctrica del día siguiente del mercado de Air-e, donde está Sabanagrande, con el clima de Sabanagrande. El calor dispara el uso de aires, ventiladores y neveras. El modelo original, <b>ATER</b>, combina cinco pronósticos y aprende cada día a cuál creerle según la hora.</p>
+  </header>
+  <div class="kpis" id="kpis"></div>
+  <nav role="tablist" id="tabs">
+    <button role="tab" data-t="contexto" aria-selected="true">Contexto</button>
+    <button role="tab" data-t="exploracion">EDA</button>
+    <button role="tab" data-t="modelos">Modelos</button>
+    <button role="tab" data-t="original">Modelo original</button>
+    <button role="tab" data-t="picos">Picos y valor</button>
+  </nav>
+
+  <section class="panel" id="p-contexto">
+    <div class="card"><h2>Seis años de demanda horaria</h2><div id="g-dia" class="plot"></div>
+      <p class="note">La línea punteada marca el inicio de la prueba (enero 2025). La demanda media creció 17,5 % entre 2021 y 2025: la prueba tiene niveles récord.</p></div>
+    <div class="grid2">
+      <div class="card"><h2>Pregunta</h2><p>¿Puede un modelo propio de agregación en línea pronosticar la demanda horaria del día siguiente del mercado de Air-e mejor que los métodos tradicionales y que los modelos de Machine Learning conocidos, con superioridad estadísticamente significativa?</p></div>
+      <div class="card"><h2>Por qué importa</h2><ul class="l">
+        <li>La tarifa regulada de Air-e subió cerca de 74 % hasta julio de 2023 (Char, s. f.).</li>
+        <li>En Atlántico el 70,1 % de los hogares subsidiados no son pobres, y el Consumo Básico de Subsistencia es de 173 kWh/mes bajo 1.000 m de altitud (Fundesarrollo).</li>
+        <li>La energía se compra el día anterior: cada MWh mal pronosticado se liquida en la bolsa.</li></ul></div>
+    </div>
+    <div class="card"><h2>Problemas evaluados y por qué se descartaron</h2>
+      <p class="muted">Criterios: C1 ≥ 20.000 datos reales · C2 mejora ≥ 10 % frente a la mejor línea base tradicional · C3 mejora significativa en el horizonte que importa · C4 la regla de validación no elige un modelo tradicional.</p>
+      <div id="g-desc" class="plot" style="height:300px"></div>
+      <div class="tbl" id="t-desc"></div>
+      <p class="note">Lluvia: mejor pero no representativa. Maíz y siembra: los ganan modelos tradicionales. Baloto: azar. La demanda eléctrica es la única que cumple los cuatro criterios, y sobre ella ATER le gana además a los modelos de ML conocidos.</p></div>
+  </section>
+
+  <section class="panel" id="p-exploracion" hidden>
+    <div class="grid2">
+      <div class="card"><h3>Perfil horario medio</h3><div id="g-perf" class="plot"></div><p class="note">Dos picos en días laborales: la tarde (13–15 h) y la noche (20–22 h).</p></div>
+      <div class="card"><h3>Demanda y sensación térmica</h3><div id="g-cal" class="plot"></div><p class="note">Días laborales de 13 a 16 h. Con índice de calor de 38–42 °C la demanda es 27,5 % mayor que con 30 °C o menos.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-modelos" hidden>
+    <div class="card"><h2>Tabla de líderes: ATER y los 7 benchmarks</h2>
+      <p class="muted">Mismas particiones, misma semilla. Validación anidada temporal (bucle externo: folds 1 a 4) y prueba única 2025–2026 (653 días).</p>
+      <h3>Validación anidada (media ± desviación estándar)</h3><div class="tbl" id="t-val"></div>
+      <h3>Prueba única 2025–2026</h3><div class="tbl" id="t-tp"></div></div>
+    <div class="card"><h3>Pronóstico frente a demanda real (elija la semana y los modelos)</h3>
+      <div class="controls"><label for="f-ini">Semana desde <input type="date" id="f-ini"></label><span id="m-sel" class="controls"></span></div>
+      <div id="g-serie" class="plot" style="height:380px"></div></div>
+    <div class="grid2">
+      <div class="card"><h3>Error por tipo de día y calor (MAPE %)</h3><div class="tbl" id="t-seg"></div></div>
+      <div class="card"><h3>Versión 1: árboles con la demanda en MWh (prueba)</h3><div class="tbl" id="t-v1"></div>
+        <p class="note">Sin el objetivo relativo, los árboles fallaron con la demanda récord. Se conserva por transparencia.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-original" hidden>
+    <div class="card verd"><h2>Veredicto: ATER es estadísticamente superior</h2><p id="veredicto"></p></div>
+    <div class="grid2">
+      <div class="card"><h3>Cómo funciona</h3>
+        <p>Cada día, al cierre, ATER compara lo que pronosticó cada experto (random forest, XGBoost, híbrido, Ridge y persistencia) con la demanda real. Sube el peso de los que acertaron <b>en esa hora</b> (y con ese calor) y corrige el nivel del pronóstico con un paso de gradiente. Está programado con numpy y tiene 13 pruebas unitarias.</p>
+<pre class="code">L[k] = Σ_j exp(-(c-τ_j)²/2σ²) · S[h, j, k]
+w[k] = exp(-η L[k]) / Σ_i exp(-η L[i])
+ŷ    = (1 + b[h]) · Σ_k w[k] f[k]
+al cierre del día:  S ← λS + ℓ ;  b[h] ← b[h] − η_b ∂ℓ/∂b</pre></div>
+      <div class="card"><h3>¿A quién le cree ATER a cada hora?</h3><div id="g-pesos" class="plot"></div></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Model Confidence Set (α = 0,10)</h3><div class="tbl" id="t-mcs"></div><p class="note">Solo ATER queda en el conjunto de modelos superiores.</p></div>
+      <div class="card"><h3>Reducción del MSE frente a cada benchmark</h3><div id="g-ic" class="plot"></div><p class="note">IC 95 % por bootstrap estacionario (bloque medio de 7 días).</p></div>
+    </div>
+    <div class="card"><h3>Pruebas de hipótesis (21 comparaciones, ajuste de Holm)</h3><div class="tbl" id="t-pr" style="max-height:420px;overflow:auto"></div></div>
+    <div class="card"><h3>Tamaño del efecto</h3><div class="tbl" id="t-ef"></div>
+      <p class="note">Frente a los árboles relativos el efecto es pequeño: δ de Cliff pareado ≈ 0,25 (umbral 0,147). Con el δ no pareado y la d de Cohen sería despreciable.</p></div>
+    <div class="grid2">
+      <div class="card"><h3>Ablación (MSE en la prueba)</h3><div id="g-abl" class="plot" style="height:520px"></div>
+        <p class="note">Aportan los pesos por hora (+7,9 % de MSE sin ellos) y la corrección de nivel (+2,6 %). El núcleo de calor no aportó.</p></div>
+      <div class="card"><h3>Importancia global (SHAP)</h3><div id="g-imp" class="plot" style="height:520px"></div><p class="note">Media de |SHAP| en 150 horas de prueba, ATER frente al random forest.</p></div>
+    </div>
+    <div class="card"><h3>Robustez ante la semilla</h3><div class="tbl" id="t-sem"></div></div>
+  </section>
+
+  <section class="panel" id="p-picos" hidden>
+    <div class="grid2">
+      <div class="card"><h3>Horas de demanda alta</h3><p class="note" id="n-u"></p><div class="tbl" id="t-pico"></div></div>
+      <div class="card"><h3>Curva ROC</h3><div id="g-roc" class="plot"></div></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Costo anual de los desvíos</h3><div id="g-vd" class="plot"></div><p class="note">Supuesto: todo MWh de desvío se liquida al precio de bolsa medio del día (XM). Cota superior.</p></div>
+      <div class="card"><h3>Rúbrica ponderada de los benchmarks</h3><div class="tbl" id="t-rub"></div></div>
+    </div>
+  </section>
+  <p class="note">Fuentes: XM S.A. E.S.P. (API Sinergox), NASA POWER, Fundesarrollo, Char (s. f.). Jairo Serrano · Machine Learning, Maestría en Ingeniería Industrial · Prof. Lihki Rubio · v3.0, octubre de 2026. Versión estática; el dashboard con predicción en vivo está en Render.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.2/plotly.min.js"></script>
+<script>
+const D = /*__DATA__*/null;
+const EL = D.elegido, RF = "Random forest (relativo)", TR = ["Persistencia (misma hora de ayer)","Estacional (misma hora semana pasada)","Promedio por hora y día"];
+const nf = (x,d=1)=> x==null||isNaN(x) ? "–" : Number(x).toLocaleString("es-CO",{minimumFractionDigits:d,maximumFractionDigits:d});
+const pv = x => x<1e-4 ? "< 0,0001" : nf(x,4);
+const css = v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const corto = m => m.replace(" (misma hora de ayer)","").replace(" (misma hora semana pasada)","").replace(" (relativo)"," relativo").replace(" (residuo relativo)","").replace(" (modelo original)"," (original)").replace(" (lineal)","");
+const COL = ()=>({"Persistencia (misma hora de ayer)":"#9aa5a0","Estacional (misma hora semana pasada)":"#b8b09a","Promedio por hora y día":"#c9b8b8",
+  "Ridge (lineal)":"#5b7f96","Random forest (relativo)":css("--good"),"XGBoost (relativo)":css("--cool"),"Híbrido Ridge + XGBoost (residuo relativo)":"#8e6bb0", [EL]:css("--accent")});
+const T = Object.fromEntries(D.tp.map(r=>[r.modelo,r])), V = Object.fromEntries(D.vd.map(r=>[r.modelo,r]));
+const mejRF = 100*(1-T[EL].MSE/T[RF].MSE);
+document.getElementById("kpis").innerHTML = [
+  ["Error medio (MAPE) de ATER en 2025–2026", nf(T[EL].MAPE,2)+" %", "hot"],
+  ["Menos error cuadrático que la misma hora de ayer", nf(T[EL]["mejora_vs_persistencia_%"],0)+" %", "hot"],
+  ["Menos error cuadrático que el mejor ML conocido (random forest)", nf(mejRF,1)+" %", ""],
+  ["Modelos en el Model Confidence Set", "solo ATER", "txt"],
+  ["Ahorro anual en desvíos vs. persistencia (cota sup.)", "$"+nf(V[EL].ahorro_anual_vs_persistencia_COP_millones/1000,0)+" mil M", ""]
+].map(([t,v,c])=>`<div class="kpi"><div class="v ${c}">${v}</div><div class="t">${t}</div></div>`).join("");
+const tipo = m => m===EL ? '<span class="pill win">original</span>' : TR.includes(m) ? '<span class="pill">tradicional</span>' : '<span class="pill ml">ML</span>';
+function tabla(id, rows, cols, key="modelo"){ // cols: [clave, título, decimales|null|"p"]
+  const h = "<table><thead><tr>"+cols.map(c=>`<th>${c[1]}</th>`).join("")+"</tr></thead><tbody>"+
+    rows.map(r=>`<tr class="${r[key]===EL?"sel":""}">`+cols.map(c=> c[2]==null ? `<td>${c[0]===key&&D.mods.includes(r[c[0]])?corto(r[c[0]])+" "+tipo(r[c[0]]):(r[c[0]]??"")}</td>` : c[2]==="p" ? `<td class="n">${pv(r[c[0]])}</td>` : `<td class="n">${nf(r[c[0]],c[2])}</td>`).join("")+"</tr>").join("")+"</tbody></table>";
+  document.getElementById(id).innerHTML = h;
+}
+tabla("t-val", D.val.map(r=>({...r, mse:nf(r.MSE_media,0)+" ± "+nf(r.MSE_de,0), mape:nf(r.MAPE_media,2)+" ± "+nf(r.MAPE_de,2)})), [["modelo","Modelo"],["mse","MSE"],["mape","MAPE %"]]);
+tabla("t-tp", D.tp, [["modelo","Modelo"],["MAPE","MAPE %",2],["MSE","MSE",0],["mejora_vs_persistencia_%","Mejora vs ayer %",1],["AUC_pico","AUC picos",3],["p_MCS","p MCS","p"],["inferencia_s","Inferencia (s)",3]]);
+tabla("t-pico", D.tp, [["modelo","Modelo"],["AUC_pico","AUC",3],["POD","Detecta",3],["FAR","Falsas alarmas",3],["CSI","CSI",3]]);
+tabla("t-seg", D.seg.map(r=>({...r, modelo:r.valor})), [["segmento","Segmento"],["modelo","Valor"],["Persistencia (misma hora de ayer)","Ayer",2],[RF,"RF relativo",2],[EL,"ATER",2]]);
+tabla("t-v1", D.v1, [["modelo","Modelo (v1)"],["MAPE","MAPE %",2],["mejora_MSE_vs_Persistencia_%","Mejora vs ayer %",1]]);
+tabla("t-rub", D.rub, [["modelo","Modelo"],["puntaje","Puntaje",1],["nivel","Nivel"]]);
+tabla("t-mcs", D.mcs.map(r=>({...r, inc:r.en_conjunto_10pct?"sí":"no"})), [["modelo","Modelo"],["p_MCS","p MCS","p"],["inc","En el conjunto"]]);
+tabla("t-pr", D.pr.map(r=>({...r, modelo:r.benchmark})), [["prueba","Prueba"],["modelo","Benchmark"],["estadistico","Estadístico",2],["p_crudo","p crudo","p"],["p_holm","p Holm","p"],["conclusion","Conclusión"]]);
+tabla("t-ef", D.ef.map(r=>({...r, modelo:r.benchmark})), [["modelo","Benchmark"],["mejora_MSE_pct","Mejora MSE %",1],["IC95_lo","IC inf. %",1],["IC95_hi","IC sup. %",1],["dias_gana_ATER_pct","Días que gana ATER %",1],["delta_cliff_pareado","δ Cliff pareado",3],["delta_cliff","δ Cliff no pareado",3],["d_cohen","d Cohen",3]]);
+tabla("t-sem", D.sem.map(r=>({...r, semilla:String(r.semilla)})), [["semilla","Semilla"],["MSE_ATER","MSE ATER",1],["MSE_Random forest (relativo)","MSE RF",1],["MSE_XGBoost (relativo)","MSE XGBoost",1],["mejora_vs_RF_%","Mejora vs RF %",1]], "semilla");
+tabla("t-desc", D.desc, [["orden","#",0],["problema","Problema"],["n_datos","Datos",0],["mejor_ML","Mejor ML"],["linea_base","Línea base"],["mejora_pct","Mejora %",1],["criterios_cumplidos","Criterios",0],["veredicto","Veredicto"]], "orden");
+const v = D.ver;
+document.getElementById("veredicto").innerHTML = `Mejor métrica media que los 7 benchmarks en la validación anidada y en la prueba. Frente al mejor benchmark (random forest relativo) rechazan la igualdad <b>${v.pruebas_que_rechazan_vs_mejor_benchmark.length} pruebas</b> (${v.pruebas_que_rechazan_vs_mejor_benchmark.join(", ")}), con p ajustado por Holm &lt; 0,05. Efecto pequeño pero consistente: δ de Cliff pareado ${nf(v.delta_cliff_pareado,2)}; no pareado ${nf(v.delta_cliff_no_pareado,2)} y d de Cohen ${nf(v.d_cohen,2)} (despreciables).`;
+document.getElementById("n-u").textContent = "Demanda mayor que "+nf(D.U,0)+" MWh (percentil 95 de entrenamiento). Por el crecimiento, en la prueba ese umbral se supera en 44 % de las horas.";
+
+function base(title, ytitle){ return {title:{text:title,font:{size:14}}, paper_bgcolor:"rgba(0,0,0,0)", plot_bgcolor:"rgba(0,0,0,0)",
+  font:{family:css("--f-body"), color:css("--ink"), size:12}, margin:{l:56,r:12,t:36,b:44},
+  xaxis:{gridcolor:css("--line"), zerolinecolor:css("--line")}, yaxis:{title:ytitle, gridcolor:css("--line"), zerolinecolor:css("--line")},
+  legend:{orientation:"h", y:-0.22}}; }
+const CFG = {displayModeBar:false, responsive:true};
+const sel = new Set([EL, RF, TR[0]]);
+function serie(){
+  const t0 = new Date(D.pt.t0.replace(" ","T")), ini = new Date(document.getElementById("f-ini").value+"T00:00");
+  const i0 = Math.max(0, Math.round((ini - t0)/36e5)), i1 = Math.min(D.pt.y.length, i0+168);
+  const x = [...Array(i1-i0)].map((_,k)=>new Date(t0.getTime()+(i0+k)*36e5));
+  const tr = [{x, y:D.pt.y.slice(i0,i1), name:"Real", line:{color:css("--ink"), width:2.2}}];
+  const C = COL(); [...sel].forEach(m=>tr.push({x, y:D.pt[m].slice(i0,i1), name:corto(m), line:{color:C[m], width:m===EL?2:1.3}}));
+  Plotly.react("g-serie", tr, base("", "MWh"), CFG);
+}
+function dibujar(){
+  const C = COL();
+  Plotly.react("g-dia", [{x:D.dia.f, y:D.dia.m, name:"media diaria", line:{color:css("--cool"), width:1}},
+                         {x:D.dia.f, y:D.dia.x, name:"máximo diario", line:{color:css("--accent"), width:1}}],
+    {...base("", "MWh por hora"), shapes:[{type:"line", x0:"2025-01-01", x1:"2025-01-01", yref:"paper", y0:0, y1:1, line:{dash:"dot", color:css("--muted")}}]}, CFG);
+  Plotly.react("g-desc", [{type:"bar", orientation:"h", y:D.desc.map(r=>r.problema.slice(0,46)), x:D.desc.map(r=>r.mejora_pct),
+    marker:{color:D.desc.map(r=>r.criterios_cumplidos===4?css("--accent"):css("--muted"))}, text:D.desc.map(r=>nf(r.mejora_pct,1)+" % · "+r.criterios_cumplidos+"/4"), textposition:"outside"}],
+    {...base("", ""), xaxis:{title:"mejora frente a la mejor línea base tradicional (%)", gridcolor:css("--line"), range:[-15,90]}, yaxis:{autorange:"reversed", automargin:true},
+     margin:{l:10,r:12,t:10,b:44}, showlegend:false, shapes:[{type:"line", x0:10, x1:10, yref:"paper", y0:0, y1:1, line:{dash:"dash", color:css("--ink")}}]}, CFG);
+  Plotly.react("g-perf", ["laboral","sábado","domingo o festivo"].map((k,i)=>({x:D.perf.hora, y:D.perf[k], name:k, mode:"lines+markers", marker:{size:4},
+    line:{color:[css("--accent"), css("--cool"), css("--muted")][i]}})), {...base("", "MWh"), xaxis:{title:"hora", gridcolor:css("--line"), dtick:3}}, CFG);
+  Plotly.react("g-cal", [{x:D.cal.calor, y:D.cal.mwh, mode:"markers", marker:{size:4, color:css("--accent"), opacity:.35}, name:"horas"}],
+    {...base("", "MWh"), xaxis:{title:"índice de calor en Sabanagrande (°C)", gridcolor:css("--line")}, showlegend:false}, CFG);
+  const ex = Object.keys(D.pesos).filter(k=>k!=="hora");
+  Plotly.react("g-pesos", ex.map(k=>({type:"bar", x:D.pesos.hora, y:D.pesos[k], name:corto(k), marker:{color:C[k]}})),
+    {...base("", "peso medio"), barmode:"stack", xaxis:{title:"hora", gridcolor:css("--line"), dtick:3}}, CFG);
+  const ef = [...D.ef].sort((a,b)=>a.mejora_MSE_pct-b.mejora_MSE_pct);
+  Plotly.react("g-ic", [{x:ef.map(r=>r.mejora_MSE_pct), y:ef.map(r=>corto(r.benchmark)), mode:"markers", marker:{size:10, color:css("--accent")},
+    error_x:{type:"data", symmetric:false, array:ef.map(r=>r.IC95_hi-r.mejora_MSE_pct), arrayminus:ef.map(r=>r.mejora_MSE_pct-r.IC95_lo), color:css("--accent")}}],
+    {...base("", ""), xaxis:{title:"% de reducción del MSE", gridcolor:css("--line")}, yaxis:{automargin:true}, showlegend:false}, CFG);
+  const ab = [...D.ab].sort((a,b)=>b.MSE_prueba-a.MSE_prueba);
+  Plotly.react("g-abl", [{type:"bar", orientation:"h", y:ab.map(r=>r.variante), x:ab.map(r=>r.MSE_prueba), text:ab.map(r=>(r["cambio_MSE_vs_completo_%"]>=0?"+":"")+nf(r["cambio_MSE_vs_completo_%"],1)+" %"), textposition:"outside",
+    marker:{color:ab.map(r=>r.variante==="ATER completo"?css("--accent"):r.grupo==="componente"?css("--cool"):r.grupo==="experto"?"#b8b09a":css("--muted"))}}],
+    {...base("", ""), xaxis:{title:"MWh²", gridcolor:css("--line"), range:[2100,2700]}, yaxis:{automargin:true}, margin:{l:10,r:40,t:10,b:44}, showlegend:false}, CFG);
+  const im = [...D.imp].reverse();
+  Plotly.react("g-imp", [{type:"bar", orientation:"h", y:im.map(r=>r.variable), x:im.map(r=>r.ATER_media_abs_SHAP_MWh), name:"ATER", marker:{color:css("--accent")}},
+                         {type:"bar", orientation:"h", y:im.map(r=>r.variable), x:im.map(r=>r.RF_media_abs_SHAP_MWh), name:"Random forest", marker:{color:css("--good")}}],
+    {...base("", ""), barmode:"group", xaxis:{title:"MWh", gridcolor:css("--line")}, yaxis:{automargin:true}}, CFG);
+  Plotly.react("g-roc", D.mods.filter(m=>m!=="Promedio por hora y día").map(m=>({x:D.roc[m][0], y:D.roc[m][1], name:corto(m), line:{color:C[m], width:m===EL?2.6:1.3}}))
+    .concat([{x:[0,1], y:[0,1], name:"azar", line:{dash:"dot", color:css("--muted")}}]),
+    {...base("", "verdaderos positivos"), xaxis:{title:"falsos positivos", gridcolor:css("--line")}}, CFG);
+  const vd = [...D.vd].sort((a,b)=>b.costo_anual_COP_millones-a.costo_anual_COP_millones).filter(r=>r.modelo!=="Promedio por hora y día");
+  Plotly.react("g-vd", [{type:"bar", orientation:"h", y:vd.map(r=>corto(r.modelo)), x:vd.map(r=>r.costo_anual_COP_millones/1000),
+    marker:{color:vd.map(r=>C[r.modelo])}, text:vd.map(r=>"$"+nf(r.costo_anual_COP_millones/1000,0)+" mil M"), textposition:"auto"}],
+    {...base("", ""), xaxis:{title:"miles de millones de COP por año", gridcolor:css("--line")}, yaxis:{automargin:true}, margin:{l:10,r:12,t:20,b:44}, showlegend:false}, CFG);
+  serie();
+}
+const ms = document.getElementById("m-sel");
+D.mods.forEach((m,i)=>{ const id="m"+i; ms.insertAdjacentHTML("beforeend", `<label for="${id}"><input type="checkbox" id="${id}" ${sel.has(m)?"checked":""}> ${corto(m)}</label>`);
+  document.getElementById(id).addEventListener("change", e=>{ e.target.checked ? sel.add(m) : sel.delete(m); serie(); }); });
+const fi = document.getElementById("f-ini"); fi.value = "2026-08-03"; fi.min = D.pt.t0.slice(0,10); fi.max = "2026-10-08"; fi.addEventListener("change", serie);
+function abrir(t){ document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected", b.dataset.t===t));
+  document.querySelectorAll("section.panel").forEach(s=>s.hidden = s.id!=="p-"+t); window.dispatchEvent(new Event("resize")); }
+document.querySelectorAll("#tabs button").forEach(b=>b.addEventListener("click", ()=>abrir(b.dataset.t)));
+const h = location.hash.slice(1); if (["contexto","exploracion","modelos","original","picos"].includes(h)) abrir(h);
+dibujar();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", dibujar);
+new MutationObserver(dibujar).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+</script>
