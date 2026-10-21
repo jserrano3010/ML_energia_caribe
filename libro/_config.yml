@@ -1,0 +1,16 @@
+title: "Calor y energía en el Caribe: demanda horaria de Air-e y el modelo original ATER"
+author: "Jairo Serrano — Maestría en Ingeniería Industrial"
+copyright: "2026"
+execute:
+  execute_notebooks: "off"
+bibtex_bibfiles:
+  - references.bib
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+sphinx:
+  config:
+    language: es
+    math_numfig: true
+    numfig: true
