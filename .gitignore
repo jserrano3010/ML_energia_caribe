@@ -1,0 +1,8 @@
+libro/_build/
+__pycache__/
+*.pyc
+.pytest_cache/
+# artefactos completos (> 50 MB): se regeneran con python src/correr_original.py
+artifacts/ater_modelo_original.joblib
+artifacts/ater_estado_final.joblib
+publicar/

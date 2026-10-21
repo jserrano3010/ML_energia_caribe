@@ -1,0 +1,9 @@
+# Experimentos, pruebas y libro (además de requirements.txt)
+-r requirements.txt
+optuna==5.0.0
+arch==8.0.0
+shap==0.54.1
+pytest==9.1.1
+jupyter-book==1.0.3
+nbconvert
+matplotlib
