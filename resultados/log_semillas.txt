@@ -1,0 +1,5 @@
+{'semilla': 2026, 'MSE_ATER': np.float64(2256.0915219583458), 'MSE_Random forest (relativo)': np.float64(2347.07276541903), 'MSE_XGBoost (relativo)': np.float64(2416.944333236732), 'mejora_vs_RF_%': np.float64(3.8763708054207258)}
+{'semilla': 7, 'MSE_ATER': np.float64(2265.780663580287), 'MSE_Random forest (relativo)': np.float64(2352.6624980337892), 'MSE_XGBoost (relativo)': np.float64(2434.468645228626), 'mejora_vs_RF_%': np.float64(3.6929153470211973)}
+{'semilla': 42, 'MSE_ATER': np.float64(2264.057107587699), 'MSE_Random forest (relativo)': np.float64(2350.6585202142483), 'MSE_XGBoost (relativo)': np.float64(2420.9655305822266), 'mejora_vs_RF_%': np.float64(3.684134121644167)}
+{'semilla': 123, 'MSE_ATER': np.float64(2259.7246002440406), 'MSE_Random forest (relativo)': np.float64(2344.7199908625275), 'MSE_XGBoost (relativo)': np.float64(2423.435952093419), 'mejora_vs_RF_%': np.float64(3.6249697597034003)}
+{'semilla': 999, 'MSE_ATER': np.float64(2257.4794886117947), 'MSE_Random forest (relativo)': np.float64(2349.1796976608207), 'MSE_XGBoost (relativo)': np.float64(2425.442913822278), 'mejora_vs_RF_%': np.float64(3.9034991295189503)}

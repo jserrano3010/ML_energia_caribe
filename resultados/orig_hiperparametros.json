@@ -1,0 +1,10 @@
+{
+ "hiperparametros": {
+  "eta": 89.38423554574598,
+  "lam": 0.9657109024109057,
+  "sigma": 5.068873602673464,
+  "eta_b": 0.00796538678948261
+ },
+ "mse_validacion": 1976.7348823141806,
+ "metodo": "Optuna TPE (bayesiano), 80 ensayos, semilla 2026"
+}

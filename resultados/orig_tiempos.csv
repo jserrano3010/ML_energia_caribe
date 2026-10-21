@@ -1,0 +1,9 @@
+modelo,entrenamiento_s,inferencia_s
+ATER (modelo original),32.596870482999975,0.776525392999929
+Persistencia (misma hora de ayer),0.0,0.00023493800017604372
+Estacional (misma hora semana pasada),0.0,5.704500017600367e-05
+Promedio por hora y día,0.0,0.9089399810000032
+Ridge (lineal),0.14496519599993007,0.026063686000043162
+Random forest (relativo),29.36556115799999,0.4023640309999337
+XGBoost (relativo),2.190528041999869,0.062108730999852924
+Híbrido Ridge + XGBoost (residuo relativo),0.6619869660000859,0.06765815600010683

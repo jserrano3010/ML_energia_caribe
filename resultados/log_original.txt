@@ -1,0 +1,73 @@
+anidada fold 1 listo
+anidada fold 2 listo
+anidada fold 3 listo
+anidada fold 4 listo
+                                    modelo  MSE_media   MSE_de  MAPE_media  MAPE_de
+                    ATER (modelo original)   2097.248  820.979       2.764    0.421
+Híbrido Ridge + XGBoost (residuo relativo)   2209.610  758.744       2.927    0.364
+                  Random forest (relativo)   2240.134  806.359       2.873    0.373
+                        XGBoost (relativo)   2247.426  792.725       2.871    0.386
+                            Ridge (lineal)   2541.606  856.368       3.220    0.425
+         Persistencia (misma hora de ayer)   5711.051  951.215       4.657    0.308
+     Estacional (misma hora semana pasada)   6797.209 2322.949       5.221    0.676
+                   Promedio por hora y día  12107.191 5856.456       7.431    1.890
+hiperparámetros finales: {'eta': 89.38423554574598, 'lam': 0.9657109024109057, 'sigma': 5.068873602673464, 'eta_b': 0.00796538678948261}
+máxima diferencia expertos vs benchmarks: {'Random forest (relativo)': 9.094947017729282e-13, 'XGBoost (relativo)': 0.0, 'Híbrido Ridge + XGBoost (residuo relativo)': 0.0, 'Ridge (lineal)': 0.0, 'Persistencia (misma hora de ayer)': 0.0}
+prueba de ida y vuelta: True máx. diferencia (MWh): 1.1368683772161603e-12
+                                                 variante          grupo  MSE_prueba  MAPE_prueba  MSE_validacion  cambio_MSE_vs_completo_%
+                                            ATER completo     componente    2256.092        2.435        1976.735                     0.000
+                          sin régimen térmico (sigma = ∞)     componente    2254.169        2.433        1978.975                    -0.085
+                      sin corrección de nivel (eta_b = 0)     componente    2314.915        2.545        2011.564                     2.607
+                      sin régimen horario (pesos comunes)     componente    2433.845        2.584        2215.348                     7.879
+                           sin pesos aprendidos (eta = 0)     componente    2461.038        2.597        2142.603                     9.084
+                                  sin olvido (lambda = 1)     componente    2247.341        2.417        1982.134                    -0.388
+                     promedio simple (eta = 0, eta_b = 0)     componente    2612.168        2.768        2165.509                    15.783
+                  sin el experto Random forest (relativo)        experto    2314.279        2.485        1992.823                     2.579
+                        sin el experto XGBoost (relativo)        experto    2290.892        2.482        1995.290                     1.543
+sin el experto Híbrido Ridge + XGBoost (residuo relativo)        experto    2271.373        2.441        2018.249                     0.677
+                            sin el experto Ridge (lineal)        experto    2246.294        2.411        1976.747                    -0.434
+         sin el experto Persistencia (misma hora de ayer)        experto    2247.805        2.430        1974.298                    -0.367
+                          regla estándar: promedio simple regla estándar    2612.168        2.768             NaN                    15.783
+           regla estándar: pesos por error global (1/MSE) regla estándar    2494.027        2.712             NaN                    10.546
+              regla estándar: stacking lineal no negativo regla estándar    2365.848        2.596             NaN                     4.865
+                    regla estándar: stacking lineal (MCO) regla estándar    2341.408        2.567             NaN                     3.782
+                 mejor experto individual (random forest) regla estándar    2347.073        2.543             NaN                     4.033
+                                    modelo  p_MCS  en_conjunto_10pct
+         Persistencia (misma hora de ayer) 0.0000              False
+     Estacional (misma hora semana pasada) 0.0000              False
+                            Ridge (lineal) 0.0000              False
+                   Promedio por hora y día 0.0000              False
+Híbrido Ridge + XGBoost (residuo relativo) 0.0000              False
+                        XGBoost (relativo) 0.0006              False
+                  Random forest (relativo) 0.0046              False
+                    ATER (modelo original) 1.0000               True
+{
+ "mejor_benchmark": "Random forest (relativo)",
+ "condicion1_metrica_media_mejor": true,
+ "pruebas_que_rechazan_vs_mejor_benchmark": [
+  "Diebold-Mariano (HLN)",
+  "Giacomini-White condicional",
+  "Wilcoxon de rangos con signo",
+  "MCS (único sobreviviente)"
+ ],
+ "n_pruebas_rechazan": 4,
+ "condicion2_tres_pruebas": true,
+ "delta_cliff_pareado": 0.2526799387442573,
+ "delta_cliff_no_pareado": 0.072782234896543,
+ "d_cohen": 0.11913328798205511,
+ "efecto_con_medidas_no_pareadas": "despreciable",
+ "condicion3_efecto_no_despreciable": true,
+ "R3": true,
+ "mcs_incluidos": [
+  "ATER (modelo original)"
+ ],
+ "ida_y_vuelta": true,
+ "ida_y_vuelta_max_dif_MWh": 1.1368683772161603e-12,
+ "hiperparametros": {
+  "eta": 89.38423554574598,
+  "lam": 0.9657109024109057,
+  "sigma": 5.068873602673464,
+  "eta_b": 0.00796538678948261
+ }
+}
+listo

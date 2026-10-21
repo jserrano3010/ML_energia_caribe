@@ -1,0 +1,29 @@
+{
+ "mejor_benchmark": "Random forest (relativo)",
+ "condicion1_metrica_media_mejor": true,
+ "pruebas_que_rechazan_vs_mejor_benchmark": [
+  "Diebold-Mariano (HLN)",
+  "Giacomini-White condicional",
+  "Wilcoxon de rangos con signo",
+  "MCS (único sobreviviente)"
+ ],
+ "n_pruebas_rechazan": 4,
+ "condicion2_tres_pruebas": true,
+ "delta_cliff_pareado": 0.2526799387442573,
+ "delta_cliff_no_pareado": 0.072782234896543,
+ "d_cohen": 0.11913328798205511,
+ "efecto_con_medidas_no_pareadas": "despreciable",
+ "condicion3_efecto_no_despreciable": true,
+ "R3": true,
+ "mcs_incluidos": [
+  "ATER (modelo original)"
+ ],
+ "ida_y_vuelta": true,
+ "ida_y_vuelta_max_dif_MWh": 1.1368683772161603e-12,
+ "hiperparametros": {
+  "eta": 89.38423554574598,
+  "lam": 0.9657109024109057,
+  "sigma": 5.068873602673464,
+  "eta_b": 0.00796538678948261
+ }
+}
