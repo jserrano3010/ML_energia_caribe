@@ -1,0 +1,8 @@
+modelo,AUC_sale_balota
+Persistencia (salió en el anterior),0.4964473684210527
+Climatología (frecuencia histórica),0.4993537578947368
+Dummy (promedio),0.5
+Logística (lineal),0.49233362105263156
+Random forest,0.4987692631578947
+Gradient boosting,0.5038003157894737
+Híbrido (lineal+RF),0.4977941473684211

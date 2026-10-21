@@ -1,0 +1,8 @@
+modelo,cambio_MSE_vs_promedio_%
+Dummy (promedio),0.0
+Persistencia,99.0169200809152
+Media móvil 50,2.328940790663103
+Ridge (lineal),-0.18167535656032907
+Random forest,2.2183238436956243
+Gradient boosting,13.767001945671131
+Híbrido,0.7092520026275029
