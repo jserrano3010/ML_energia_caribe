@@ -7,3 +7,4 @@ artifacts/ater_modelo_original.joblib
 artifacts/ater_estado_final.joblib
 publicar/
 artifacts/ater_dashboard.joblib
+resultados/e2_Xy.pkl
