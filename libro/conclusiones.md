@@ -42,7 +42,7 @@
 - Estimar la demanda residencial de Sabanagrande con datos de facturación, si Air-e los publica.
 
 ## Declaración de autoría y uso de herramientas de IA
-**Autor:** Jairo Serrano.
+**Autores:** Edwin Yunis y Jairo Serrano.
 
 Se usó **Claude (Anthropic)** como asistente de programación y redacción para:
 - buscar y descargar datos,
@@ -50,6 +50,10 @@ Se usó **Claude (Anthropic)** como asistente de programación y redacción para
 - redactar borradores de los capítulos,
 - y auditar que cada cifra del texto coincida con una salida de los notebooks.
 
-Las decisiones de diseño, la elección del problema y la interpretación de los resultados son responsabilidad del autor, que revisó el código y debe poder explicarlo y modificarlo en la sustentación.
+Las decisiones de diseño, la elección del problema y la interpretación de los resultados son responsabilidad de los autores, que revisaron el código y deben poder explicarlo y modificarlo en la sustentación.
 
-**Firma:** ______________________ Jairo Serrano.
+**Firmas:**
+
+______________________ Edwin Yunis
+
+______________________ Jairo Serrano

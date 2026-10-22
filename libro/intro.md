@@ -2,7 +2,7 @@
 
 **Pronóstico horario de la demanda eléctrica de Air-e con el clima de Sabanagrande y un modelo original de agregación de expertos (ATER)**
 
-**Curso:** Machine Learning, Maestría en Ingeniería Industrial. **Profesor:** Dr. Lihki Rubio. **Autor:** Jairo Serrano. **Versión:** Entregable 3, octubre de 2026.
+**Curso:** Machine Learning, Maestría en Ingeniería Industrial. **Profesor:** Dr. Lihki Rubio. **Autores:** Edwin Yunis y Jairo Serrano. **Versión:** Entregable 3, octubre de 2026.
 
 **Dashboard desplegado (Render):** <https://ml-energia-caribe.onrender.com> · **Repositorio:** <https://github.com/jserrano3010/ML_energia_caribe>
 
