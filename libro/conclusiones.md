@@ -10,7 +10,8 @@
    - Tiene 2,44 % de MAPE en la prueba.
    - Reduce el MSE 65 % frente a la persistencia y 3,9 % frente al random forest relativo (IC 95 %: 1,1–6,8 %).
    - Gana en las 5 semillas probadas (3,6–3,9 %) y en la validación anidada.
-4. **Lo que aporta ATER** son los pesos que cambian según la hora (7,9 % del MSE) y la corrección de nivel en línea (2,6 %). El suavizado por calor no aportó.
+4. **Las 28 combinaciones del Entregable 2 no cambian el veredicto.** Los 7 modelos base (KNN, Ridge, Lasso, Decision Tree, Random Forest, XGBoost y SVR) con 4 optimizadores (Grid, Random, Bayesiano y genético) dan como mejores al random forest y al XGBoost. ATER les gana en la validación anidada y en la prueba, y en el MCS con los 15 modelos sigue siendo el único sobreviviente.
+5. **Lo que aporta ATER** son los pesos que cambian según la hora (7,9 % del MSE) y la corrección de nivel en línea (2,6 %). El suavizado por calor no aportó.
 
 ## Veredicto sobre las condiciones del modelo original
 

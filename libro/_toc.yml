@@ -15,6 +15,7 @@ parts:
       - file: 03_prueba
       - file: 04_picos_valor
       - file: 05_rubrica
+      - file: 02b_entregable2
   - caption: "4. Revisión de literatura"
     chapters:
       - file: literatura
