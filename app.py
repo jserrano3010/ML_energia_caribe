@@ -23,7 +23,7 @@ navbar = dbc.NavbarSimple(
     brand="Calor y energía en el Caribe · ATER", color="primary", dark=True, sticky="top", fluid=True)
 
 app.layout = html.Div([navbar, dbc.Container(dash.page_container, fluid=True, className="py-3 px-3", style={"maxWidth": "1280px"}),
-                       html.Footer("Jairo Serrano · Machine Learning, Maestría en Ingeniería Industrial · Prof. Lihki Rubio · v3.0, octubre de 2026",
+                       html.Footer("Edwin Yunis y Jairo Serrano · Machine Learning, Maestría en Ingeniería Industrial · Prof. Lihki Rubio · v3.0, octubre de 2026",
                                    className="text-muted small text-center py-3")])
 
 if __name__ == "__main__":

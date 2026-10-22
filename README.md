@@ -1,6 +1,6 @@
 # Calor y energía en el Caribe: demanda horaria de Air-e y el modelo original ATER
 
-Proyecto final de Machine Learning (Maestría en Ingeniería Industrial, Prof. Lihki Rubio). Autor: Jairo Serrano.
+Proyecto final de Machine Learning (Maestría en Ingeniería Industrial, Prof. Lihki Rubio). Autores: Edwin Yunis y Jairo Serrano.
 
 Pronóstico, al cierre de cada día, de la demanda de las 24 horas del día siguiente del mercado de Air-e (CARIBE SOL, XM), donde está Sabanagrande, con el clima de Sabanagrande (NASA POWER). Modelo original **ATER**: agregación de expertos en línea con pesos por hora y calor y corrección de nivel (`src/original_model.py`).
 
