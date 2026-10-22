@@ -1,0 +1,16 @@
+modelo,p_MCS,en_conjunto_10pct
+Persistencia (misma hora de ayer),0.0,False
+E2 Decision Tree (Bayesiano (Optuna TPE)),0.0,False
+E2 Lasso (Grid Search),0.0,False
+Estacional (misma hora semana pasada),0.0,False
+Ridge (lineal),0.0,False
+E2 Ridge (Random Search),0.0,False
+Promedio por hora y día,0.0,False
+E2 KNN (Random Search),0.0,False
+Híbrido Ridge + XGBoost (residuo relativo),0.0,False
+E2 SVR (Grid Search),0.0,False
+E2 XGBoost (Random Search),0.0,False
+XGBoost (relativo),0.0014,False
+E2 Random Forest (Grid Search),0.0016,False
+Random forest (relativo),0.0046,False
+ATER (modelo original),1.0,True

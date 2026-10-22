@@ -1,0 +1,5 @@
+optimizador,rango_medio_Friedman,evaluaciones_para_quedar_a_1pct_del_mejor,tiempo_busqueda_total_min,veces_mejor_optimizador
+Grid Search,2.392857142857143,3.7222222222222223,5.214991176183335,3
+Bayesiano (Optuna TPE),2.5,4.958333333333333,7.511388112016662,1
+Random Search,2.5,3.9444444444444446,6.777032102750003,3
+Genético,2.607142857142857,3.4285714285714284,5.766576465483333,0
