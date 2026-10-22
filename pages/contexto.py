@@ -105,6 +105,6 @@ layout = html.Div([
         html.Li("La prueba 2025–2026 se consultó más de una vez durante el proyecto (versión 1 de los árboles); se reporta en el libro."),
         html.Li("La ventaja de ATER frente al random forest es pequeña (3,9 % del MSE; δ de Cliff pareado 0,25). Frente a los métodos tradicionales es grande."),
         html.Li("Un error por debajo en días de calor extremo afectaría primero a los hogares vulnerables; por eso se reportan aparte las horas pico y los días más calurosos."),
-        html.Li("Autor: Jairo Serrano. Asistencia de IA (Claude, Anthropic) declarada en el capítulo 8 del libro. Versión 3.0, octubre de 2026."),
+        html.Li("Autores: Edwin Yunis y Jairo Serrano. Asistencia de IA (Claude, Anthropic) declarada en el capítulo 8 del libro. Versión 3.0, octubre de 2026."),
     ])]), className="mb-3"),
 ])
