@@ -29,6 +29,27 @@ lider = pd.DataFrame({
     "MSE validación anidada (media ± de)": [f"{an.loc[m, 'MSE_media']:,.0f} ± {an.loc[m, 'MSE_de']:,.0f}".replace(",", ".") for m in tp.modelo],
     "MSE prueba": tp.MSE.round(0), "MAPE prueba (%)": tp.MAPE.round(2), "AUC horas pico": tp.AUC_pico.round(3),
     "inferencia (s, 15.672 h)": tp.inferencia_s.round(3), "en el MCS (10 %)": np.where(tp.en_conjunto_10pct, "sí", "no")})
+lider.insert(2, "optimizador", ["Bayesiano (Optuna TPE)" if m == D.ORIG else ("—" if m in D.TRAD else "Grid (validación)") for m in tp.modelo])
+
+# ---------------- las 28 combinaciones del Entregable 2 (7 modelos x 4 optimizadores)
+E2C = D.csv("e2_combinaciones.csv"); E2M = D.csv("e2_mejores.csv"); E2A = D.csv("e2_anytime.csv", index_col=0)
+mcs_todos = D.csv("e2_mcs_todos.csv").set_index("modelo")
+for c in ["en el MCS (10 %)"]:
+    lider[c] = [("sí" if mcs_todos.en_conjunto_10pct.get(m, False) else "no") for m in tp.modelo]
+lider = pd.concat([lider, pd.DataFrame({
+    "modelo": "E2 · " + E2M.modelo, "tipo": "Entregable 2", "optimizador": E2M.optimizador,
+    "configuración": [", ".join(f"{k}={v:.3g}" if isinstance(v, float) else f"{k}={v}" for k, v in __import__("json").loads(h).items()) for h in E2M.hiperparametros],
+    "MSE validación anidada (media ± de)": [f"{a:,.0f} ± {b:,.0f}".replace(",", ".") for a, b in zip(E2M.MSE_media, E2M.MSE_de)],
+    "MSE prueba": E2M.MSE_prueba.round(0), "MAPE prueba (%)": E2M.MAPE_prueba.round(2), "AUC horas pico": E2M.AUC_pico.round(3),
+    "inferencia (s, 15.672 h)": E2M.inferencia_prueba_s.round(3), "en el MCS (10 %)": np.where(E2M.en_conjunto_10pct, "sí", "no")})],
+    ignore_index=True).sort_values("MSE prueba").reset_index(drop=True)
+tab_e2 = E2C.assign(**{"MSE externo (media ± de)": [f"{a:,.0f} ± {b:,.0f}".replace(",", ".") for a, b in zip(E2C.MSE_media, E2C.MSE_de)],
+                       "MAPE (%)": E2C.MAPE_media.round(2), "búsqueda (min)": (E2C.tiempo_busqueda_s / 60).round(1),
+                       "entrenamiento (s)": E2C.tiempo_entrenamiento_s.round(2), "inferencia (s)": E2C.tiempo_inferencia_s.round(3)})[
+    ["modelo", "optimizador", "MSE externo (media ± de)", "MAPE (%)", "rango_en_modelo", "evaluaciones", "búsqueda (min)", "entrenamiento (s)", "inferencia (s)"]]
+f_any = go.Figure([go.Scatter(x=E2A.index, y=E2A[c], mode="lines+markers", name=c) for c in E2A.columns])
+f_any.update_layout(title="Desempeño en cualquier momento: mejor MSE interno hasta la evaluación t (relativo al mejor final)",
+                    xaxis_title="evaluación", yaxis_title="MSE relativo (1 = mejor encontrado)", height=360)
 
 EDIT = [("calor", "Índice de calor ayer, misma hora (°C)"), ("T2M", "Temperatura ayer (°C)"), ("RH2M", "Humedad ayer (%)"),
         ("lag24", "Demanda ayer, misma hora (MWh)"), ("media_7d", "Media de los últimos 7 días (MWh)"), ("max_dia_ant", "Máximo de ayer (MWh)")]
@@ -70,7 +91,8 @@ tab_pruebas = pr[["prueba", "benchmark", "estadistico", "p_crudo", "p_holm", "de
 tab_pruebas["benchmark"] = tab_pruebas.benchmark.map(D.CORTO)
 for c in ["estadistico", "delta_cliff_pareado", "d_cohen"]: tab_pruebas[c] = tab_pruebas[c].round(3)
 for c in ["p_crudo", "p_holm"]: tab_pruebas[c] = tab_pruebas[c].map(lambda v: f"{v:.2e}")
-tab_mcs = mcs.assign(modelo=mcs.modelo.map(D.CORTO), p_MCS=mcs.p_MCS.round(4), en_conjunto_10pct=np.where(mcs.en_conjunto_10pct, "sí", "no"))
+mcs = D.csv("e2_mcs_todos.csv")
+tab_mcs = mcs.assign(modelo=mcs.modelo.map(lambda m: D.CORTO.get(m, m)), p_MCS=mcs.p_MCS.round(4), en_conjunto_10pct=np.where(mcs.en_conjunto_10pct, "sí", "no"))
 
 PSEUDO = """para cada día d (en orden):
     para cada hora t de d:                         # pronóstico emitido al cierre de d-1
@@ -86,7 +108,14 @@ layout = html.Div([
     dbc.Alert([html.B("Veredicto: "), f"ATER es estadísticamente superior a los 7 benchmarks (MCS, Giacomini-White y Diebold-Mariano con p ajustado por Holm < 0,05). "
                f"Frente al mejor benchmark (random forest relativo) reduce el MSE 3,9 % y gana el {pr.dias_gana_ATER_pct.iloc[12]:.1f} % de los días: "
                "un efecto pequeño (δ de Cliff pareado 0,25) pero consistente."], color="success"),
-    dbc.Card(dbc.CardBody([html.H4("Tabla de líderes"), html.P("Mejor combinación de cada modelo. Se puede ordenar y filtrar.", className="small text-muted"), tabla(lider)]), className="mb-3"),
+    dbc.Card(dbc.CardBody([html.H4("Tabla de líderes"), html.P("ATER, los 7 benchmarks del proyecto y la mejor combinación (modelo + optimizador) de cada uno de los 7 modelos base del Entregable 2. "
+                                                           "Métrica del bucle externo de la validación anidada (media ± desviación estándar) y de la prueba única 2025–2026. Se puede ordenar y filtrar.",
+                                                           className="small text-muted"), tabla(lider)]), className="mb-3"),
+    dbc.Card(dbc.CardBody([html.H4("Entregable 2: las 28 combinaciones (7 modelos × 4 optimizadores)"),
+        html.P("KNN, Ridge, Lasso, Decision Tree, Random Forest, XGBoost y SVR, cada uno optimizado con Grid Search, Random Search, Bayesiano (Optuna TPE) y genético, "
+               "con el mismo presupuesto (12 evaluaciones por fold) y los mismos folds externos que ATER.", className="small text-muted"),
+        tabla(tab_e2.rename(columns={"rango_en_modelo": "puesto en su modelo"}), alto="420px"),
+        dcc.Graph(figure=f_any, config={"displayModeBar": False})]), className="mb-3"),
 
     dbc.Card(dbc.CardBody([html.H4("Predicción en vivo"),
         html.P("Elija una hora del periodo de prueba: el formulario se llena con los datos reales que se conocían al emitir el pronóstico. "
