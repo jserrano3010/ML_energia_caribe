@@ -154,11 +154,13 @@ layout = html.Div([
         html.P(["ATER (agregación de expertos por régimen horario y térmico, con corrección de nivel en línea) combina cinco pronósticos conocidos con pesos exponenciales "
                 "que dependen de la hora y del calor, y corrige cada día el nivel con la demanda que acaba de observar. Está programado con numpy en ",
                 html.Code("src/original_model.py"), " y tiene 13 pruebas unitarias."]),
-        dbc.Row([dbc.Col(html.Pre(PSEUDO, className="bg-light p-2 small", style={"whiteSpace": "pre-wrap"}), lg=6),
+        dbc.Row([dbc.Col(html.Img(src=dash.get_asset_url("ater_algoritmo.png"),
+                                  alt="Algoritmo ATER: pronóstico con pesos exponenciales por hora y calor, y actualización de pérdidas y corrección de nivel al cierre de cada día",
+                                  style={"width": "100%", "maxWidth": "1000px", "height": "auto"}), lg=12, className="mb-3"),
                  dbc.Col(html.Ul([html.Li("Frente a Devaine et al. (2013) y Gaillard y Goude (2015): la especialización es continua (núcleo sobre el calor), no por reglas fijas, y se corrige el nivel."),
                                   html.Li("Frente al BOA suavizado (Ziel, 2022): suaviza en el calor, no entre horas."),
                                   html.Li("Frente al stacking: los pesos cambian cada día; en la ablación ATER le gana al stacking por MCO y al no negativo."),
-                                  html.Li("Lo que aporta según la ablación: pesos por hora (7,9 % del MSE) y corrección de nivel (2,6 %). El núcleo de calor no aportó.")], className="small"), lg=6)]),
+                                  html.Li("Lo que aporta según la ablación: pesos por hora (7,9 % del MSE) y corrección de nivel (2,6 %). El núcleo de calor no aportó.")], className="small"), lg=12)]),
         dbc.Row([dbc.Col(dcc.Graph(figure=f_conv, config={"displayModeBar": False}), lg=6), dbc.Col(dcc.Graph(figure=f_pesos, config={"displayModeBar": False}), lg=6)]),
         dcc.Graph(figure=f_abl, config={"displayModeBar": False}),
         dbc.Alert([html.B("Veredicto explícito: superior. "), "R1 novedad con matices (la familia existe para la demanda de Francia; la combinación y la aplicación al Caribe son nuevas). "
